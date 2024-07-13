@@ -11,9 +11,21 @@ async function main() {
   console.log(`contract deployed to: ${await SimpleStorage.getAddress()}`);
 
   if (network.config.chainId !== 31337 && process.env.ETHERSCAN_API_KEY) {
+    console.log("waiting for blocks to be mined");
     await SimpleStorage.deploymentTransaction().wait(6);
+    console.log("6 blocks mined, verifying.....");
     await verify(await SimpleStorage.getAddress(), []);
+    console.log("verified");
   }
+
+  const currentValue = await SimpleStorage.retrieve();
+  console.log(`current value is: ${currentValue}`);
+
+  //update current value
+  const transactionResponse = await SimpleStorage.store(7);
+  await transactionResponse.wait(1);
+  const updatedValue = await SimpleStorage.retrieve();
+  console.log(`updated value is: ${updatedValue}`);
 }
 
 async function verify(contractAddress, args) {

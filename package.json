@@ -23,6 +23,7 @@
     "typechain": "^8.3.0"
   },
   "scripts": {
-    "build": "yarn hardhat run scripts/deploy.js --network sepolia"
+    "build-sepolia": "yarn hardhat run scripts/deploy.js --network sepolia",
+    "build-hardhat": "yarn hardhat run scripts/deploy.js"
   }
 }

@@ -22,7 +22,6 @@ contract SimpleStorage {
 
     function store(uint256 _favoriteNumber) public virtual {
         favNum = _favoriteNumber;
-        favNum += 4;
     }
 
     //view and pure function
