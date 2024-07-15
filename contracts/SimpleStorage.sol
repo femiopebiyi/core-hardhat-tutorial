@@ -29,8 +29,10 @@ contract SimpleStorage {
         return favNum;
     }
 
-    function add() public pure returns (uint256) {
-        return (1 + 1);
+    function add(uint256 numOne, uint256 numTwo) public returns (uint256) {
+        uint256 addition = (numOne + numTwo);
+        favNum = addition;
+        return favNum;
     }
 
     //calldata memory and storage
@@ -38,6 +40,11 @@ contract SimpleStorage {
         //People memory newPerson = People({favNum: _favNum, name: _name});
         people.push(People(_name, _favNum));
         nameToFavNum[_name] = _favNum;
+    }
+
+    function retrieveList() public view returns (People memory) {
+        require(people.length > 0, "No people in the list");
+        return people[0];
     }
 }
 

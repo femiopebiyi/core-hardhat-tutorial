@@ -26,6 +26,17 @@ async function main() {
   await transactionResponse.wait(1);
   const updatedValue = await SimpleStorage.retrieve();
   console.log(`updated value is: ${updatedValue}`);
+
+  const add = await SimpleStorage.add("7", "7");
+  await add.wait(1);
+
+  console.log(`new favorite number is ${await SimpleStorage.retrieve()}`);
+
+  const people = await SimpleStorage.addPerson("femi", 1000);
+  await people.wait(1);
+  const updatedList = await SimpleStorage.retrieveList();
+  console.log(`new list: ${updatedList}`);
+  console.log(await SimpleStorage.getAddress());
 }
 
 async function verify(contractAddress, args) {
